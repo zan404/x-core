@@ -143,6 +143,7 @@ type WebSocketConfig struct {
 	Path                string            `json:"path"`
 	Headers             map[string]string `json:"headers"`
 	AcceptProxyProtocol bool              `json:"acceptProxyProtocol"`
+	UsePathEarlyData    bool              `json:"usePathEarlyData"`
 }
 
 // Build implements Buildable.
@@ -166,9 +167,10 @@ func (c *WebSocketConfig) Build() (proto.Message, error) {
 		}
 	}
 	config := &websocket.Config{
-		Path:   path,
-		Header: header,
-		Ed:     ed,
+		Path:             path,
+		Header:           header,
+		Ed:               ed,
+		UsePathEarlyData: c.UsePathEarlyData,
 	}
 	if c.AcceptProxyProtocol {
 		config.AcceptProxyProtocol = c.AcceptProxyProtocol
