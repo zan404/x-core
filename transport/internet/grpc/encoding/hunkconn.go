@@ -6,11 +6,12 @@ import (
 	"net"
 
 	"github.com/xtls/xray-core/common/buf"
-	xnet "github.com/xtls/xray-core/common/net"
 	"github.com/xtls/xray-core/common/net/cnc"
 	"github.com/xtls/xray-core/common/signal/done"
 	"google.golang.org/grpc/metadata"
 	"google.golang.org/grpc/peer"
+
+	grpc_proto "github.com/xtls/xray-core/common/protocol/grpc"
 )
 
 type HunkConn interface {
@@ -50,19 +51,22 @@ func NewHunkConn(hc HunkConn, cancel context.CancelFunc) net.Conn {
 		}
 	}
 
-	md, ok := metadata.FromIncomingContext(hc.Context())
-	if ok {
-		header := md.Get("x-real-ip")
-		if len(header) > 0 {
-			realip := xnet.ParseAddress(header[0])
-			if realip.Family().IsIP() {
+	if _, isServer := hc.(*gRPCServiceTunServer); isServer {
+		if md, ok := metadata.FromIncomingContext(hc.Context()); ok {
+			if xRealIP := grpc_proto.ParseXRealIP(md); xRealIP != nil && xRealIP.Family().IsIP() {
 				rAddr = &net.TCPAddr{
-					IP:   realip.IP(),
-					Port: 0,
+					IP:   xRealIP.IP(),
+					Port: int(0),
+				}
+			} else if forwardedAddrs := grpc_proto.ParseXForwardedFor(md); len(forwardedAddrs) > 0 && forwardedAddrs[0].Family().IsIP() {
+				rAddr = &net.TCPAddr{
+					IP:   forwardedAddrs[0].IP(),
+					Port: int(0),
 				}
 			}
 		}
 	}
+
 	wrc := NewHunkReadWriter(hc, cancel)
 	return cnc.NewConnection(
 		cnc.ConnectionInput(wrc),
