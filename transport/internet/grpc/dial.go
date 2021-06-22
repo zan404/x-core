@@ -9,6 +9,7 @@ import (
 	"github.com/xtls/xray-core/common"
 	"github.com/xtls/xray-core/common/net"
 	"github.com/xtls/xray-core/common/session"
+	"github.com/xtls/xray-core/core"
 	"github.com/xtls/xray-core/transport/internet"
 	"github.com/xtls/xray-core/transport/internet/grpc/encoding"
 	"github.com/xtls/xray-core/transport/internet/stat"
@@ -116,7 +117,8 @@ func getGrpcClient(ctx context.Context, dest net.Destination, streamSettings *in
 				return nil, err
 			}
 			address := net.ParseAddress(rawHost)
-			return internet.DialSystem(gctx, net.TCPDestination(address, port), sockopt)
+			detachedContext := core.ToBackgroundDetachedContext(gctx)
+			return internet.DialSystem(detachedContext, net.TCPDestination(address, port), sockopt)
 		}),
 	}
 

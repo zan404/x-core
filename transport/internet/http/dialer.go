@@ -13,6 +13,7 @@ import (
 	"github.com/xtls/xray-core/common/net"
 	"github.com/xtls/xray-core/common/net/cnc"
 	"github.com/xtls/xray-core/common/session"
+	"github.com/xtls/xray-core/core"
 	"github.com/xtls/xray-core/transport/internet"
 	"github.com/xtls/xray-core/transport/internet/stat"
 	"github.com/xtls/xray-core/transport/internet/tls"
@@ -68,7 +69,8 @@ func getHTTPClient(ctx context.Context, dest net.Destination, streamSettings *in
 			dctx = session.ContextWithID(dctx, session.IDFromContext(ctx))
 			dctx = session.ContextWithOutbound(dctx, session.OutboundFromContext(ctx))
 
-			pconn, err := internet.DialSystem(dctx, net.TCPDestination(address, port), sockopt)
+			detachedContext := core.ToBackgroundDetachedContext(dctx)
+			pconn, err := internet.DialSystem(detachedContext, net.TCPDestination(address, port), sockopt)
 			if err != nil {
 				newError("failed to dial to " + addr).Base(err).AtError().WriteToLog()
 				return nil, err
