@@ -353,6 +353,7 @@ type TLSConfig struct {
 	Fingerprint                      string           `json:"fingerprint"`
 	RejectUnknownSNI                 bool             `json:"rejectUnknownSni"`
 	PinnedPeerCertificateChainSha256 *[]string        `json:"pinnedPeerCertificateChainSha256"`
+	ClientVerify                     bool                  `json:"clientVerify"`
 }
 
 // Build implements Buildable.
@@ -368,6 +369,7 @@ func (c *TLSConfig) Build() (proto.Message, error) {
 	}
 	serverName := c.ServerName
 	config.AllowInsecure = c.Insecure
+	config.ClientVerify = c.ClientVerify
 	if len(c.ServerName) > 0 {
 		config.ServerName = serverName
 	}
