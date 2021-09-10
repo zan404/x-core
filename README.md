@@ -69,6 +69,8 @@ This repo relies on the following third-party projects:
   - [refraction-networking/utls](https://github.com/refraction-networking/utls)
   - [seiflotfy/cuckoofilter](https://github.com/seiflotfy/cuckoofilter)
   - [google/starlark-go](https://github.com/google/starlark-go)
+  - [inetaf/netaddr](https://github.com/inetaf/netaddr)
+
 - For testing only:
   - [miekg/dns](https://github.com/miekg/dns)
   - [stretchr/testify](https://github.com/stretchr/testify)
