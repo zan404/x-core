@@ -262,7 +262,11 @@ func (s *DoHNameServer) sendQuery(ctx context.Context, domain string, clientIP n
 			dnsCtx, cancel = context.WithDeadline(dnsCtx, deadline)
 			defer cancel()
 
-			b, err := dns.PackMessage(r.msg)
+			// https://datatracker.ietf.org/doc/html/rfc8484#section-4.1
+			// In order to maximize cache friendliness, SHOULD use a DNS ID of 0 in every DNS request.
+			newMsg := *r.msg
+			newMsg.Header.ID = 0
+			b, err := dns.PackMessage(&newMsg)
 			if err != nil {
 				newError("failed to pack dns query for ", domain).Base(err).AtError().WriteToLog()
 				return
@@ -277,6 +281,8 @@ func (s *DoHNameServer) sendQuery(ctx context.Context, domain string, clientIP n
 				newError("failed to handle DOH response for ", domain).Base(err).AtError().WriteToLog()
 				return
 			}
+
+			rec.ReqID = r.msg.ID
 			s.updateIP(r, rec)
 		}(req)
 	}
