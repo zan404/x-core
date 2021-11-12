@@ -19,9 +19,9 @@ func cipherFromString(c string) shadowsocks.CipherType {
 	case "aes-256-gcm", "aead_aes_256_gcm":
 		return shadowsocks.CipherType_AES_256_GCM
 	case "chacha20-poly1305", "aead_chacha20_poly1305", "chacha20-ietf-poly1305":
-		return shadowsocks.CipherType_CHACHA20_POLY1305
+		return shadowsocks.CipherType_CHACHA20_IETF_POLY1305
 	case "xchacha20-poly1305", "aead_xchacha20_poly1305", "xchacha20-ietf-poly1305":
-		return shadowsocks.CipherType_XCHACHA20_POLY1305
+		return shadowsocks.CipherType_XCHACHA20_IETF_POLY1305
 	case "none", "plain":
 		return shadowsocks.CipherType_NONE
 	default:
@@ -67,7 +67,7 @@ func (v *ShadowsocksServerConfig) Build() (proto.Message, error) {
 				return nil, newError("Shadowsocks password is not specified.")
 			}
 			if account.CipherType < shadowsocks.CipherType_AES_128_GCM ||
-				account.CipherType > shadowsocks.CipherType_XCHACHA20_POLY1305 {
+				account.CipherType > shadowsocks.CipherType_XCHACHA20_IETF_POLY1305 {
 				return nil, newError("unsupported cipher method: ", user.Cipher)
 			}
 			config.Users = append(config.Users, &protocol.User{
