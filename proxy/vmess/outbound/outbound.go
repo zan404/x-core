@@ -7,7 +7,6 @@ import (
 	"crypto/hmac"
 	"crypto/sha256"
 	"hash/crc64"
-	"time"
 
 	"github.com/xtls/xray-core/common"
 	"github.com/xtls/xray-core/common/buf"
@@ -21,6 +20,7 @@ import (
 	"github.com/xtls/xray-core/common/xudp"
 	core "github.com/xtls/xray-core/core"
 	"github.com/xtls/xray-core/features/policy"
+	"github.com/xtls/xray-core/proxy"
 	"github.com/xtls/xray-core/proxy/vmess"
 	"github.com/xtls/xray-core/proxy/vmess/encoding"
 	"github.com/xtls/xray-core/transport"
@@ -166,7 +166,7 @@ func (h *Handler) Process(ctx context.Context, link *transport.Link, dialer inte
 		if request.Command == protocol.RequestCommandMux && request.Port == 666 {
 			bodyWriter = xudp.NewPacketWriter(bodyWriter, target)
 		}
-		if err := buf.CopyOnceTimeout(input, bodyWriter, time.Millisecond*100); err != nil && err != buf.ErrNotTimeoutReader && err != buf.ErrReadTimeout {
+		if err := buf.CopyOnceTimeout(input, bodyWriter, proxy.FirstPayloadTimeout); err != nil && err != buf.ErrNotTimeoutReader && err != buf.ErrReadTimeout {
 			return newError("failed to write first payload").Base(err)
 		}
 
