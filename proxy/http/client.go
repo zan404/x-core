@@ -8,7 +8,6 @@ import (
 	"net/http"
 	"net/url"
 	"sync"
-	"time"
 
 	"github.com/xtls/xray-core/common"
 	"github.com/xtls/xray-core/common/buf"
@@ -21,6 +20,7 @@ import (
 	"github.com/xtls/xray-core/common/task"
 	"github.com/xtls/xray-core/core"
 	"github.com/xtls/xray-core/features/policy"
+	"github.com/xtls/xray-core/proxy"
 	"github.com/xtls/xray-core/transport"
 	"github.com/xtls/xray-core/transport/internet"
 	"github.com/xtls/xray-core/transport/internet/stat"
@@ -83,11 +83,11 @@ func (c *Client) Process(ctx context.Context, link *transport.Link, dialer inter
 	var firstPayload []byte
 
 	if reader, ok := link.Reader.(buf.TimeoutReader); ok {
-		// 0-RTT optimization for HTTP/2: If the payload comes within 50 ms, it can be
+		// 0-RTT optimization for HTTP/2: If the payload comes very soon, it can be
 		// transmitted together. Note we should not get stuck here, as the payload may
 		// not exist (considering to access MySQL database via a HTTP proxy, where the
 		// server sends hello to the client first).
-		if mbuf, _ := reader.ReadMultiBufferTimeout(50 * time.Millisecond); mbuf != nil {
+		if mbuf, _ := reader.ReadMultiBufferTimeout(proxy.FirstPayloadTimeout); mbuf != nil {
 			mlen := mbuf.Len()
 			firstPayload = bytespool.Alloc(mlen)
 			mbuf, _ = buf.SplitBytes(mbuf, firstPayload)

@@ -7,6 +7,7 @@ package proxy
 
 import (
 	"context"
+	"time"
 
 	"github.com/xtls/xray-core/common/net"
 	"github.com/xtls/xray-core/common/protocol"
@@ -15,6 +16,9 @@ import (
 	"github.com/xtls/xray-core/transport/internet"
 	"github.com/xtls/xray-core/transport/internet/stat"
 )
+
+// A timeout for reading the first payload from the client, used in 0-RTT optimizations.
+const FirstPayloadTimeout = 100 * time.Millisecond
 
 // An Inbound processes inbound connections.
 type Inbound interface {
