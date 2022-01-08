@@ -41,6 +41,7 @@ var (
 		"trojan":      func() interface{} { return new(TrojanClientConfig) },
 		"mtproto":     func() interface{} { return new(MTProtoClientConfig) },
 		"dns":         func() interface{} { return new(DNSOutboundConfig) },
+		"ssh":         func() interface{} { return new(SSHClientConfig) },
 	}, "protocol", "settings")
 
 	ctllog = log.New(os.Stderr, "xctl> ", 0)
