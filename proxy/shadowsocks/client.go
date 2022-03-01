@@ -76,7 +76,8 @@ func (c *Client) Process(ctx context.Context, link *transport.Link, dialer inter
 	}
 	newError("tunneling request to ", destination, " via ", network, ":", server.Destination().NetAddr()).WriteToLog(session.ExportIDToError(ctx))
 
-	defer conn.Close()
+	connElem := net.AddConnection(conn)
+	defer net.RemoveConnection(connElem)
 
 	request := &protocol.RequestHeader{
 		Version: Version,
