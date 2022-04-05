@@ -179,11 +179,14 @@ func main() {
 	}
 
 	gofmtArgs := []string{
-		"-s", "-l", "-e", "-w",
+		"-l", "-e", "-w",
 	}
 
 	goimportsArgs := []string{
 		"write",
+		"--Section", "Standard",
+		"--Section", "Default",
+		"--Section", "\"Prefix(github.com/xtls/xray-core)\"",
 	}
 
 	RunMany(gofmt, gofmtArgs, rawFilesSlice)
