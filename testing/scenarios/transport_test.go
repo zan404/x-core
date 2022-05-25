@@ -6,6 +6,8 @@ import (
 	"testing"
 	"time"
 
+	"golang.org/x/sync/errgroup"
+
 	"github.com/xtls/xray-core/app/log"
 	"github.com/xtls/xray-core/app/proxyman"
 	"github.com/xtls/xray-core/common"
@@ -28,7 +30,6 @@ import (
 	"github.com/xtls/xray-core/transport/internet/headers/wechat"
 	"github.com/xtls/xray-core/transport/internet/quic"
 	tcptransport "github.com/xtls/xray-core/transport/internet/tcp"
-	"golang.org/x/sync/errgroup"
 )
 
 func TestHTTPConnectionHeader(t *testing.T) {

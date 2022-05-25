@@ -7,6 +7,8 @@ import (
 	"time"
 
 	"github.com/sagernet/sing-shadowsocks/shadowaead_2022"
+	"golang.org/x/sync/errgroup"
+
 	"github.com/xtls/xray-core/app/log"
 	"github.com/xtls/xray-core/app/proxyman"
 	"github.com/xtls/xray-core/common"
@@ -19,7 +21,6 @@ import (
 	"github.com/xtls/xray-core/proxy/shadowsocks_2022"
 	"github.com/xtls/xray-core/testing/servers/tcp"
 	"github.com/xtls/xray-core/testing/servers/udp"
-	"golang.org/x/sync/errgroup"
 )
 
 func TestShadowsocks2022Tcp(t *testing.T) {

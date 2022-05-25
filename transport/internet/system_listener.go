@@ -10,6 +10,7 @@ import (
 	"time"
 
 	"github.com/pires/go-proxyproto"
+
 	"github.com/xtls/xray-core/common/net"
 	"github.com/xtls/xray-core/common/session"
 )

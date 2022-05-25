@@ -4,6 +4,7 @@ import (
 	"context"
 
 	"github.com/golang/protobuf/proto"
+
 	"github.com/xtls/xray-core/features"
 )
 

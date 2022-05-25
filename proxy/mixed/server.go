@@ -2,6 +2,7 @@ package mixed
 
 import (
 	"context"
+
 	"github.com/xtls/xray-core/common"
 	"github.com/xtls/xray-core/common/net"
 	"github.com/xtls/xray-core/common/session"
@@ -92,7 +93,6 @@ func (s *Server) Network() []net.Network {
 
 // Process implements proxy.Inbound.
 func (s *Server) Process(ctx context.Context, network net.Network, conn stat.Connection, dispatcher routing.Dispatcher) error {
-
 	// socks only
 	if isInNetworkSlice(network, &s.socksOnlyNetworks) {
 		newError("Connection is identified as a Socks connection").AtDebug().WriteToLog(session.ExportIDToError(ctx))

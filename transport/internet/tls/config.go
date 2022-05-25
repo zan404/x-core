@@ -47,6 +47,7 @@ func (c *Config) loadSelfCertPool() (*x509.CertPool, error) {
 	}
 	return root, nil
 }
+
 func (c *Config) loadSelfCertPoolClientCA() (*x509.CertPool, error) {
 	root := x509.NewCertPool()
 	for _, cert := range c.Certificate {
@@ -328,7 +329,7 @@ func (c *Config) GetTLSConfig(opts ...Option) *tls.Config {
 	for _, opt := range opts {
 		opt(config)
 	}
-	
+
 	if c.VerifyClientCertificate {
 		config.ClientAuth = tls.RequireAndVerifyClientCert
 	}
