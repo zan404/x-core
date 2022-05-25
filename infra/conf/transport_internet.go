@@ -9,6 +9,7 @@ import (
 	"strings"
 
 	"github.com/golang/protobuf/proto"
+
 	"github.com/xtls/xray-core/common/platform/filesystem"
 	"github.com/xtls/xray-core/common/protocol"
 	"github.com/xtls/xray-core/common/serial"
@@ -355,7 +356,7 @@ type TLSConfig struct {
 	Fingerprint                      string           `json:"fingerprint"`
 	RejectUnknownSNI                 bool             `json:"rejectUnknownSni"`
 	PinnedPeerCertificateChainSha256 *[]string        `json:"pinnedPeerCertificateChainSha256"`
-	VerifyClientCertificate          bool                  `json:"verifyClientCertificate"`
+	VerifyClientCertificate          bool             `json:"verifyClientCertificate"`
 }
 
 // Build implements Buildable.

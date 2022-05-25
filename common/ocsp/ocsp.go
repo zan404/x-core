@@ -8,8 +8,9 @@ import (
 	"net/http"
 	"os"
 
-	"github.com/xtls/xray-core/common/platform/filesystem"
 	"golang.org/x/crypto/ocsp"
+
+	"github.com/xtls/xray-core/common/platform/filesystem"
 )
 
 func GetOCSPForFile(path string) ([]byte, error) {

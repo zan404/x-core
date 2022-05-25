@@ -10,6 +10,7 @@ import (
 	"time"
 
 	"github.com/golang/protobuf/proto"
+
 	"github.com/xtls/xray-core/common"
 	v2net "github.com/xtls/xray-core/common/net"
 	"github.com/xtls/xray-core/common/session"

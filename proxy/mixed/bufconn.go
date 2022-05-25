@@ -2,14 +2,15 @@ package mixed
 
 import (
 	"bufio"
+	"time"
+
 	"github.com/xtls/xray-core/common/net"
 	"github.com/xtls/xray-core/transport/internet/stat"
-	"time"
 )
 
 type BufferedConnection struct {
 	reader *bufio.Reader
-	conn 	stat.Connection
+	conn   stat.Connection
 }
 
 func NewBufferedConnection(conn stat.Connection) BufferedConnection {

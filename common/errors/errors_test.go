@@ -6,6 +6,7 @@ import (
 	"testing"
 
 	"github.com/google/go-cmp/cmp"
+
 	. "github.com/xtls/xray-core/common/errors"
 	"github.com/xtls/xray-core/common/log"
 )

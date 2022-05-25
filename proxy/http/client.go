@@ -9,6 +9,8 @@ import (
 	"net/url"
 	"sync"
 
+	"golang.org/x/net/http2"
+
 	"github.com/xtls/xray-core/common"
 	"github.com/xtls/xray-core/common/buf"
 	"github.com/xtls/xray-core/common/bytespool"
@@ -25,7 +27,6 @@ import (
 	"github.com/xtls/xray-core/transport/internet"
 	"github.com/xtls/xray-core/transport/internet/stat"
 	"github.com/xtls/xray-core/transport/internet/tls"
-	"golang.org/x/net/http2"
 )
 
 type Client struct {

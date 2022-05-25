@@ -7,6 +7,7 @@ import (
 	"time"
 
 	goxtls "github.com/xtls/go"
+
 	"github.com/xtls/xray-core/common"
 	"github.com/xtls/xray-core/common/net"
 	"github.com/xtls/xray-core/common/session"
