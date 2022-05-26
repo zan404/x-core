@@ -27,14 +27,14 @@ require (
 	github.com/v2fly/ss-bloomring v0.0.0-20210312155135-28617310f63e
 	github.com/xtls/go v0.0.0-20220914232946-0441cf4cf837
 	go.starlark.net v0.0.0-20220817180228-f738f5508c12
-	golang.org/x/crypto v0.0.0-20220829220503-c86fa9a7ed90
-	golang.org/x/net v0.0.0-20220909164309-bea034e7d591
+	golang.org/x/crypto v0.0.0-20220919173607-35f4265a4bc0
+	golang.org/x/net v0.0.0-20220920203100-d0c6ba3f52d9
 	golang.org/x/sync v0.0.0-20220907140024-f12130a52804
-	golang.org/x/sys v0.0.0-20220915200043-7b5979e65e41
+	golang.org/x/sys v0.0.0-20220919091848-fb04ddd9f9c8
 	google.golang.org/grpc v1.49.0
 	google.golang.org/protobuf v1.28.1
 	h12.io/socks v1.0.3
-	inet.af/netaddr v0.0.0-20211027220019-c74959edd3b6
+	inet.af/netaddr v0.0.0-20220811202034-502d2d690317
 )
 
 require (
@@ -54,13 +54,13 @@ require (
 	github.com/pmezard/go-difflib v1.0.0 // indirect
 	github.com/riobard/go-bloom v0.0.0-20200614022211-cdc8013cb5b3 // indirect
 	github.com/rogpeppe/go-internal v1.8.0 // indirect
-	go4.org/intern v0.0.0-20211027215823-ae77deb06f29 // indirect
-	go4.org/unsafe/assume-no-moving-gc v0.0.0-20211027215541-db492cf91b37 // indirect
-	golang.org/x/exp v0.0.0-20220916125017-b168a2c6b86b // indirect
+	go4.org/intern v0.0.0-20220617035311-6925f38cc365 // indirect
+	go4.org/unsafe/assume-no-moving-gc v0.0.0-20220617031537-928513b29760 // indirect
+	golang.org/x/exp v0.0.0-20220921023135-46d9e7742f1e // indirect
 	golang.org/x/mod v0.6.0-dev.0.20220419223038-86c51ed26bb4 // indirect
 	golang.org/x/text v0.3.7 // indirect
 	golang.org/x/tools v0.1.12 // indirect
-	google.golang.org/genproto v0.0.0-20220916172020-2692e8806bfa // indirect
+	google.golang.org/genproto v0.0.0-20220920201722-2b89144ce006 // indirect
 	gopkg.in/check.v1 v1.0.0-20201130134442-10cb98267c6c // indirect
 	gopkg.in/tomb.v1 v1.0.0-20141024135613-dd632973f1e7 // indirect
 	gopkg.in/yaml.v2 v2.4.0 // indirect
